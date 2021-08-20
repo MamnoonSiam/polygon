@@ -1,0 +1,36 @@
+Name: Divisible Subsequences Queries
+
+
+Legend
+=============================
+
+You are given an integer array $a$ of length $n$ and $q$ update/queries. If
+it's an update, you'll be given two integers $i$ and $x$, meaning you have to
+update $a_i$ with $x$. And if it's a query, you'll be given two integers $l$
+and $r$, for which you need to find the number of subsequences of $a[l\ldots
+r]$ which have their sum divisible by $k$ (given in the beginning and is
+fixed throughout the rest of the eternity).
+
+
+Input Format
+=============================
+
+The first line contains three space separated integers $n$, $k$ and $q$ $(1
+\le n, q \le 100000, 1 \le k \le 10)$.
+
+The second line contains $n$ space separated integers $a_1, a_2, \ldots,
+a_n$ $(0 \le a_i < k)$.
+
+Next $q$ lines contains three space separated integers, each starting with
+the integer $T$ $(T \in \{1, 2\})$.
+
+If $T = 1$, it's an update and the next two integers will be $i$ and $x$ $(1
+\le i \le n, 0 \le x < k)$.
+
+If $T = 2$, it's a query and the next two integers will be $l$ and $r$ $(1
+\le l \le r \le n)$.
+
+Output Format
+=============================
+
+For each of the query event, print the number of desired subsequences.

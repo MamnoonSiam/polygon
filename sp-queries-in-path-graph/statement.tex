@@ -1,0 +1,65 @@
+Name: Shortest Path Queries in Path Graph
+
+Legend
+=============================
+
+You are given a undirected weighted \textit{path graph} of $n$ vertices,
+which has the following properties:
+\begin{itemize}
+  \item There may be parallel edges.
+  \item Each edge is between vertex $i$ and $(i+1)$ for some $i \in [1,
+    n-1]$.
+  \item Each edge has two attributes: its color and its length.
+\end{itemize}
+
+A \textit{colorful path} is a path where two adjacent pair of edges have
+different colors.
+
+Let $\texttt{scp}(u, v)$ be the length of the shortest colorful path from
+vertex $u$ to vertex $v$, and -1 if there's no colorful path between $u$ and
+$v$.
+
+You have to process $q$ updates and queries on this graph. If it's an update,
+you'll receive four integers $i$, $j$, $c^\prime$ and $w^\prime$, meaning you
+have to update the color of $j$-th parallel edge between $i$ and $i+1$-th
+vertex with $c^\prime$ and its length with $w^\prime$.
+
+And if it's a query, you will be given two integers $u$ and $v$, for which
+you need to find the value of $\texttt{scp}(u, v)$.
+
+
+Input Format
+=============================
+
+First line of the input contains two space separated integers $n$
+and $q$ $(2 \le n \le 10^5, 1 \le q \le 10^)$.
+
+Next, you'll receive $n-1$ blocks of input lines. $i$-th of such block will
+contain description of the edges between vertex $i$ and $i+1$.
+
+$i$-th block will start with an integer $p_i$ $(1 \le p_i \le 50)$ -- the
+number of parallel edges between vertex $i$ and $i+1$.
+
+$(j+1)$-th $(1 \le j \le e_i)$ line of the $i$-th block will contain two
+space separated integers $c_{i, j}$ and $w_{i, j}$ $(1 \le c_{i, j} \le n,
+1 \le w_{i, j} \le 10^9)$ -- the color and the
+length of the $j$-th parallel edge between vertex $i$ and $i+1$.
+
+These $n-1$ blocks of input will be followed by $q$ lines, each containing
+three or five space separated integers, starting with $T$.
+
+If $T = 1$, it's an update event and the next four integers will be $i$,
+$j$, $c^\prime$ and $w^\prime$ $(1 \le i < n, 1 \le j \le p_i, 1 \le
+c^\prime \le n, 1 \le w^\prime \le 10^9)$.
+
+If $T = 2$, it's a query event and the next two integers will be $u$ and $v$
+$(1 \le u < v \le n)$.
+
+The last event will be a query event.
+
+
+Output Format
+=============================
+
+For each of the query event, print the value of $\texttt{scp}(u, v)$ in a new
+line.

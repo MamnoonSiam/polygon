@@ -1,0 +1,99 @@
+Name: Sequential Operations 4
+
+Legend
+=============================
+
+In this problem, everything is in 2D plane. The point with coordinate
+x-coordinate $p$ and y-coordinate $q$ will be denoted with $(p, q)$.
+
+Let's start with explaining what ``rotate point $Q$ $\theta$ degrees
+counter-clockwise (ccw) with respect to (wrt) point $P$'' means.
+
+Take the vector $u = \overrightarrow{PQ}$ and rotate it $\theta$
+degrees counter-clockwise. Let's name the resulting vector $v$. Place $v$'s
+starting point at $P$ and see where the end-point lands. Let's name that
+landing point $Q^\prime$. Then $Q^\prime$ is the point that you get by
+``rotating $Q$ $\theta$ degrees ccw wrt $P$''. See the following illustration
+when $\theta = 270^\circ$.
+\begin{center}
+  \begin{tikzpicture}
+    \filldraw[fill=green!20!white,draw=none,->] (8mm,4mm) arc
+    (30:295:8.944mm) -- (0,0) -- cycle;
+    \draw[draw=green!50!black,-{Stealth[scale=1.5]}] (8mm,4mm) arc
+    (30:295:8.944mm);
+    \node[text=green!50!black] at (0, 1) {$\theta = 270^\circ$};
+    \draw[-{Stealth[scale=1.5]}] (0, 0) -- (4, 2);
+    \draw[-{Stealth[scale=1.5]},dashed] (0, 0) -- (2, -4);
+    \node at (4.5, 2) {$Q$};
+    \node at (-0.5, 0) {$P$};k
+    \node at (2, -4.5) {$Q^\prime$};
+    \node at (4,2) [circle,fill,inner sep=1pt]{};
+    \node at (2,-4) [circle,fill,inner sep=1pt]{};
+    \node at (0,0) [circle,fill,inner sep=1pt]{};
+  \end{tikzpicture}
+\end{center}
+Let's write it as $Q^\prime = \texttt{rotate}(P, Q, \theta)$.
+
+You are given three sequences $x = (x_1, x_2, \ldots, x_n)$, $y = (y_1, y_2,
+\ldots, y_n)$ and $t = (t_1, t_2, \ldots, t_n)$.
+
+Let's define a function named $\texttt{messmeup}(l, r, P)$, which takes two
+integers $l$, $r$ and a point $P$ as input and returns another point as the
+output.
+
+\normalem %%%% disable auto underline
+\begin{algorithm}[H]
+  \SetKwFunction{FMain}{messmeup}
+  \SetKwProg{Fn}{Function}{:}{}
+  \Fn{\FMain{$l, r, P$}} {
+    \For{$i \gets l$ \KwTo $r$} {
+      $P \gets \texttt{rotate}((x_i, y_i), P, 90^\circ \cdot t_i)$\;
+    }
+    \textbf{return} $P$\;
+  }
+\end{algorithm}
+\ULforem %%%% enable auto underline
+
+You have to process $q$ update and queries. If it's an update, you'll be
+given four integers $i$, $x^\prime$, $y^\prime$ and $t^\prime$, meaning you
+have
+to update $x_i$ with $x^\prime$, $y_i$ with $y^\prime$ and $t_i$ with
+$t^\prime$. And if it's a query, you'll be given four integers $l$, $r$, $x$
+and $y$, for which you need to find the output of $\texttt{messmeup}(l, r,
+(x, y))$.
+
+Obviously, the coordinates of the output point may grow exponentially. So you
+have to print the coordinates modulo $10^9+7$.
+
+
+Input Format
+=============================
+
+The first line of the input contains two space separated integers $n$ and $q$
+$(1 \le n, q \le 200000)$.
+
+The second line will contain $n$ space separated integers $x_1, x_2, \ldots,
+x_n$ $(|x_i| \le 10^9)$.
+
+The third line will contain $n$ space separated integers $y_1, y_2, \ldots,
+y_n$ $(|y_i| \le 10^9)$.
+
+The fourth line will contain $n$ space separated integers $t_1, t_2, \ldots,
+t_n$ $(t_i \in \{ 1, 2, 3 \})$.
+
+Next $q$ lines will contain five spare separated integers, each starting with
+the integer $T$.
+
+If $T = 1$, it's an update and the next four integers will be $i$,
+$x^\prime$, $y^\prime$ and $t^\prime$ $(1 \le i \le n, |x^\prime|,$
+$|y^\prime| \le 10^9, t^\prime \in \{ 1, 2, 3 \})$.
+
+If $T = 2$, it's a query and the next four integers will be $l$, $r$, $x$ and
+$y$ $(1 \le l \le r \le n, |x|, |y| \le 10^9)$.
+
+
+Output Format
+=============================
+
+For each of the query events, output the coordinates of $\texttt{messmeup}(l,
+r, (x, y))$ modulo $10^9 + 7$.
